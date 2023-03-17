@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -36,7 +37,7 @@ public class CarService {
     }
 
     public Car save(Car newCar){
-        newCar.setCreatedAt(LocalDateTime.now());
+        newCar.setCreatedAt(ZonedDateTime.now());
         return carRepo.save(newCar);
     }
 

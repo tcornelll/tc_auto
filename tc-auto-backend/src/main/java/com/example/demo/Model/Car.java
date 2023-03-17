@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -23,7 +24,7 @@ public class Car {
     private int askingPrice;
     private boolean financing;
     private List<String> notes;
-    private LocalDateTime createdAt;
+    private ZonedDateTime createdAt;
 
     private String mainImageRef;
 
@@ -31,7 +32,7 @@ public class Car {
 
     private int year;
 
-    public Car(String make, String model, int mileage, int askingPrice, boolean financing, List<String> notes, LocalDateTime createdAt, String mainImageRef, String color, int year) {
+    public Car(String make, String model, int mileage, int askingPrice, boolean financing, List<String> notes, ZonedDateTime createdAt, String mainImageRef, String color, int year) {
         this.make = make;
         this.model = model;
         this.mileage = mileage;
@@ -44,7 +45,6 @@ public class Car {
         this.year = year;
     }
 
-    public Car(){
-
-    }
 }
+
+
