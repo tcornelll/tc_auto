@@ -1,20 +1,26 @@
 package com.example.demo.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
+import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
-@Document
+@Document (collection = "cars")
 @Getter
 @Setter
+@JsonRootName("data")
 public class Car {
     @Id
     private String id;
@@ -24,7 +30,7 @@ public class Car {
     private int askingPrice;
     private boolean financing;
     private List<String> notes;
-    private ZonedDateTime createdAt;
+    private LocalDateTime createdAt;
 
     private String mainImageRef;
 
@@ -32,7 +38,10 @@ public class Car {
 
     private int year;
 
-    public Car(String make, String model, int mileage, int askingPrice, boolean financing, List<String> notes, ZonedDateTime createdAt, String mainImageRef, String color, int year) {
+
+    private MultipartFile image;
+
+    public Car(String make, String model, int mileage, int askingPrice, boolean financing, List<String> notes, LocalDateTime createdAt, String mainImageRef, String color, int year) {
         this.make = make;
         this.model = model;
         this.mileage = mileage;
@@ -43,6 +52,10 @@ public class Car {
         this.mainImageRef = mainImageRef;
         this.color = color;
         this.year = year;
+    }
+
+    public Car(){
+        super();
     }
 
 }

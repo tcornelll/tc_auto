@@ -14,7 +14,9 @@
     "buffer": "^6.0.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+    "string-to-color": "^2.2.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

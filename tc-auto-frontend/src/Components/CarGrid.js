@@ -1,18 +1,22 @@
 import axios from 'axios';
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Grid, Box, Card } from '@mui/material';
+import { Grid, Box, Card, Button } from '@mui/material';
 import CarCard from './CarCard';
+import { useNavigate, Link, location, useLocation } from 'react-router-dom';
 
 export const springUrl = 'http://localhost:8080/api/';
 
 export default function CarGrid() {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [cars, setCars] = useState([]);
+    const isAdmin = location.state.admin;
+    console.log(isAdmin)
     useEffect(() => {
       const getAllCars = async () => {
           try{
             const response = await axios.get(`${springUrl}car`);
-            console.log(response.data);
             setCars(response.data);
           }
           catch (error){
@@ -21,16 +25,33 @@ export default function CarGrid() {
       }
       getAllCars();
     }, [])
+
+    function CreateLink(props){
+        const isAdmin = props.isAdmin;
+        if(isAdmin){
+            <Link to="/create">
+                <Button variant="outlined" color="primary" sx={{marginLeft:'50%', marginTop:'40px'}}>New Car</Button>
+            </Link>
+        }
+        
+    } 
     
     return (
         <div>
-            <Grid container alignItems="center" direction="column" columnSpacing="10px" sx={{width:"80%", margin:"auto", padding:"10px", backgroundColor:"gray"}}>
+            <Grid container justifyContent={"center"} alignItems={"center"} spacing={3}>
                 {cars.map((car) => {
                     return (
-                        <CarCard car={car} key={car.id}/>
+                        <Grid item marginLeft={5} marginRight={5} xs={12} md={4}>
+                            <CarCard car={car} isAdmin={isAdmin} key={car.id}/>                            
+                        </Grid>
                     )
                 })}
             </Grid>
+            {isAdmin &&
+                <Link to="/create">
+                    <Button variant="outlined" color="primary" sx={{marginLeft:'50%', marginTop:'40px'}}>New Car</Button>
+                </Link>
+            }
         </div>
     )   
 }
