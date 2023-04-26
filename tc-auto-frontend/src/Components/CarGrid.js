@@ -11,8 +11,8 @@ export default function CarGrid() {
     const navigate = useNavigate();
     const location = useLocation();
     const [cars, setCars] = useState([]);
-    const isAdmin = location.state.admin;
-    console.log(isAdmin)
+    const isAdmin = true//JSON.parse(sessionStorage.getItem('isAdmin'));
+    //console.log(isAdmin)
     useEffect(() => {
       const getAllCars = async () => {
           try{
@@ -27,7 +27,6 @@ export default function CarGrid() {
     }, [])
 
     function CreateLink(props){
-        const isAdmin = props.isAdmin;
         if(isAdmin){
             <Link to="/create">
                 <Button variant="outlined" color="primary" sx={{marginLeft:'50%', marginTop:'40px'}}>New Car</Button>
@@ -42,7 +41,7 @@ export default function CarGrid() {
                 {cars.map((car) => {
                     return (
                         <Grid item marginLeft={5} marginRight={5} xs={12} md={4}>
-                            <CarCard car={car} isAdmin={isAdmin} key={car.id}/>                            
+                            <CarCard car={car} key={car.id}/>                            
                         </Grid>
                     )
                 })}

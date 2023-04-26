@@ -16,9 +16,9 @@ const stc = require('string-to-color');
 export default function CarCard(props) {
     const navigate = useNavigate();
     const car = props.car;
-    const isAdmin = props.isAdmin;
     const [mainImage, setMainImage] = useState();
     const color = stc(car.color);
+    const isAdmin = true//JSON.parse(sessionStorage.getItem('isAdmim'))
     useEffect(() => {
       const getMainImage = async () => {
         try{
