@@ -14,7 +14,7 @@ import java.net.http.HttpResponse;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping
+    @PostMapping
     @CrossOrigin
     public String isAdmin(@RequestBody User user) throws IOException {
         System.out.println(user);

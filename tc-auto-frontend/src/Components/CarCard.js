@@ -18,7 +18,9 @@ export default function CarCard(props) {
     const car = props.car;
     const [mainImage, setMainImage] = useState();
     const color = stc(car.color);
-    const isAdmin = true//JSON.parse(sessionStorage.getItem('isAdmim'))
+    console.log(props)
+    const isAdmin = props.isAdmin
+    console.log(isAdmin)
     useEffect(() => {
       const getMainImage = async () => {
         try{
@@ -70,21 +72,61 @@ export default function CarCard(props) {
                     sx={{maxHeight:250}}
                 />
                 <CardContent sx={{textAlign:'center'}}>
-                    <List sx={{textAlign:'center'}}>
-                        {car.notes.map((note) =>(
-                            <ListItem key={note}>
-                                <ListItemText sx={{textAlign:'center'}}
-                                    primary={note}
-                                />
-                            </ListItem>
-                        ))}
-                    </List>
+                    <Box
+                        sx={{
+                            display:'flex',
+                            flexDirection:'row',
+                            bgcolor: 'background.paper',
+                            borderRadius: 1
+                        }}
+                    >
+                        Engine Quality : {car.engineGrade}
+                    </Box>
+                    <Box
+                        sx={{
+                            display:'flex',
+                            flexDirection:'row',
+                            bgcolor: 'background.paper',
+                            borderRadius: 1
+                        }}
+                    >
+                        Cooling Quality : {car.heatingAndCoolingGrade}
+                    </Box>
+                    <Box
+                        sx={{
+                            display:'flex',
+                            flexDirection:'row',
+                        }}
+                    >
+                        Intetior Quality : {car.interiorGrade}
+                    </Box>
+                    <Box
+                        sx={{
+                            marginTop:'10px',
+                            borderRadius:'1',
+                            bgcolor:'white',
+                            borderRadius:2,
+                            bgcolor:'lightgrey',
+                            borderBottom: "solid",
+                            borderRight: "solid"
+                        }}
+                    >
+                        {car.note}
+                    </Box>     
                 </CardContent>
                 <CardActions>
-                    {isAdmin && <Link to={`/edit`} state={{car: car}}>
-                        <Button variant="outlined">Edit</Button>
-                    </Link>}
-                    {isAdmin && <Button variant="outlined" color="error" onClick={handleDelete}>Delete</Button>}
+                    <Box
+                    sx={{
+                        justifyContent:'center',
+                        alignItems:'center',
+                        width: '100%'
+                    }}
+                    >
+                        {isAdmin && <Link to={`/edit`} state={{car: car}}>
+                            <Button variant="outlined">Edit</Button>
+                        </Link>}
+                        {isAdmin && <Button variant="outlined" color="error" onClick={handleDelete}>Delete</Button>}
+                    </Box>
                 </CardActions>
             </Card>
     )

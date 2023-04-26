@@ -14,13 +14,17 @@ export default function Login() {
     const navigate = useNavigate();
 
 
-    function handleClick(e){
+  function handleContClick(e){
+      navigate("/home")
+  }
+
+    function handleLoginClick(e){
         let user = {
             username: username,
             password: password
         }
 
-        axios.get(`${springUrl}user`, user)
+        axios.post(`${springUrl}user`, user)
         .then((response) => {
           console.log(response);
           if(response.data === "admin"){
@@ -45,7 +49,10 @@ export default function Login() {
             </CardContent>
             <CardActions>
                 <Link to="/home" state={{admin: isAdmin}}>
-                    <Button onClick={handleClick} variant="outlined">Continue</Button>
+                    <Button onClick={handleLoginClick} variant="outlined">Log In</Button>
+                </Link>
+                <Link to="/home" state={{admin: isAdmin}}>
+                    <Button onClick={handleContClick} variant="outlined">Continue</Button>
                 </Link>
             </CardActions>
         </Card>

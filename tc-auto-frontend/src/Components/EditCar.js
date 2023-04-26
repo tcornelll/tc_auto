@@ -3,7 +3,7 @@ import React from 'react'
 import { springUrl } from './CarGrid'
 import { useState } from 'react'
 import TextField from '@mui/material/TextField';
-import { FormControlLabel, FormGroup, Checkbox, Button } from '@mui/material';
+import { FormControlLabel, FormGroup, Checkbox, Button, InputLabel, Select, MenuItem, FormControl } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -17,38 +17,20 @@ export default function EditCar() {
     const id = car.id;
     const navigate = useNavigate();
 
-    const [notesChanged, setNotesChanged] = useState(false);
     const [make, setMake] = useState(car.make);
     const [model, setModel] = useState(car.model);
     const [mileage, setMileage] = useState(car.mileage);
     const [askingPrice, setAskingPrice] = useState(car.askingPrice);
     const [financing, setFinancing] = useState(car.financing);
-    const [numNotes, setNumNotes] = useState(0);
-    const [notes, setNotes] = useState(car.notes);
+    const [note, setNote] = useState(car.note);
     const [color, setColor] = useState(car.color);
     const [year, setYear] = useState(car.year);
-    const [image, setImage] = useState();
+    const [engineGrade, setEngineGrade] = useState(car.engineGrade);
+    const [heatingAndCoolingGrade, setHeatingAndCooling] = useState(car.heatingAndCoolingGrade);
+    const [interiorGrade, setInterior] = useState(car.interiorGrade)
 
-
-    function handleImageChange(e) {
-      console.log(e.target.files);
-      setImage(e.target.files[0]);
-    }
-
-    function handleNoteChange(e){
-        setNotesChanged(true);
-        setNotes(e.target.value)
-    }
 
     function handleUpdate(e) {
-        var updatedNotes = ""
-        if(notesChanged){
-            var newNotes = notes;
-            var updatedNotes = notes.split(",");
-        }
-        else {
-            updatedNotes = notes;
-        }
 
 
       var car = {
@@ -60,7 +42,10 @@ export default function EditCar() {
         financing: financing,
         color: color, 
         askingPrice: askingPrice,
-        notes: updatedNotes
+        note: note,
+        engineGrade: engineGrade,
+        heatingAndCoolingGrade: heatingAndCoolingGrade,
+        interiorGrade: interiorGrade
       }
 
       axios.put(`${springUrl}car`, car)
@@ -98,11 +83,63 @@ export default function EditCar() {
             <TextField id="color" label="Color" variant="outlined" value={color} onChange={e => setColor(e.target.value)}/>
         </Grid>
         <Grid item xs={12}>
-          <TextField id="notes" label="Car Notes here (comma separated)" value={notes} multiline rows={4} onChange={e => handleNoteChange(e)} />
+          <TextField id="note" label="Car Note" value={note} multiline rows={4} onChange={(e) => setNote(e.target.value)} />
         </Grid>
         <Grid item xs={4}>
           <FormGroup>
             <FormControlLabel control={<Checkbox />} checked={financing} onChange={e => setFinancing(!financing)} label="Financing" />
+          </FormGroup>
+        </Grid>
+        <Grid item xs={4}>
+          <FormGroup>
+            <FormControl fullWidth>
+              <InputLabel id="engineLabel">Engine Quality</InputLabel>
+              <Select
+                labelId='engineLabel'
+                id='engineSelect'
+                value={engineGrade}
+                label="Engine Quality"
+                onChange={(e) => setEngineGrade(e.target.value)}>
+    
+                <MenuItem value={"WORST"}>1  - Worst</MenuItem>
+                <MenuItem value={"BAD"}>2 - Bad</MenuItem>
+                <MenuItem value={"OK"}>3 - OK</MenuItem>
+                <MenuItem value={"GOOD"}>4 - Good</MenuItem>
+                <MenuItem value={"GREAT"}>5 - Great</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="heatingAndCoolLabel">A/C Quality</InputLabel>
+              <Select
+                labelId='heatingAndCoolLabel'
+                id='heatnCoolSelect'
+                value={heatingAndCoolingGrade}
+                label="A/C Quality"
+                onChange={(e) => setHeatingAndCooling(e.target.value)}>
+    
+                <MenuItem value={"WORST"}>1  - Worst</MenuItem>
+                <MenuItem value={"BAD"}>2 - Bad</MenuItem>
+                <MenuItem value={"OK"}>3 - OK</MenuItem>
+                <MenuItem value={"GOOD"}>4 - Good</MenuItem>
+                <MenuItem value={"GREAT"}>5 - Great</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth>
+              <InputLabel id="intLabel">Interior Quality</InputLabel>
+              <Select
+                labelId='intLabel'
+                id='intSelect'
+                value={interiorGrade}
+                label="Interior Grade"
+                onChange={(e) => setInterior(e.target.value)}>
+    
+                <MenuItem value={"WORST"}>1  - Worst</MenuItem>
+                <MenuItem value={"BAD"}>2 - Bad</MenuItem>
+                <MenuItem value={"OKAY"}>3 - OK</MenuItem>
+                <MenuItem value={"GOOD"}>4 - Good</MenuItem>
+                <MenuItem value={"GREAT"}>5 - Great</MenuItem>
+              </Select>
+            </FormControl>
           </FormGroup>
         </Grid>
       </Grid>   

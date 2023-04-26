@@ -71,7 +71,10 @@ public class CarService {
         car.setFinancing(newCar.isFinancing());
         car.setMileage(newCar.getMileage());
         car.setYear(newCar.getYear());
-        car.setNotes(newCar.getNotes());
+        car.setNote(newCar.getNote());
+        car.setEngineGrade(newCar.getEngineGrade());
+        car.setInteriorGrade(newCar.getInteriorGrade());
+        car.setHeatingAndCoolingGrade(newCar.getHeatingAndCoolingGrade());
         car.setAskingPrice(newCar.getAskingPrice());
         return carRepo.save(car);
     }

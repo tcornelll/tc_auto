@@ -1,5 +1,6 @@
 package com.example.demo.Model;
 
+import com.example.demo.Enum.GRADE;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
@@ -29,7 +30,7 @@ public class Car {
     private int mileage;
     private int askingPrice;
     private boolean financing;
-    private List<String> notes;
+    private String note;
     private LocalDateTime createdAt;
 
     private String mainImageRef;
@@ -38,20 +39,29 @@ public class Car {
 
     private int year;
 
+    private String engineGrade;
+
+    private String heatingAndCoolingGrade;
+
+    private String interiorGrade;
 
     private MultipartFile image;
 
-    public Car(String make, String model, int mileage, int askingPrice, boolean financing, List<String> notes, LocalDateTime createdAt, String mainImageRef, String color, int year) {
+    public Car(String make, String model, int mileage, int askingPrice, boolean financing, String note, LocalDateTime createdAt, String mainImageRef, String color, int year,
+               String engineGrade, String heatingAndCoolingGrade, String interiorGrade) {
         this.make = make;
         this.model = model;
         this.mileage = mileage;
         this.askingPrice = askingPrice;
         this.financing = financing;
-        this.notes = notes;
+        this.note = note;
         this.createdAt = createdAt;
         this.mainImageRef = mainImageRef;
         this.color = color;
         this.year = year;
+        this.engineGrade = engineGrade;
+        this.heatingAndCoolingGrade = heatingAndCoolingGrade;
+        this.interiorGrade  = interiorGrade;
     }
 
     public Car(){

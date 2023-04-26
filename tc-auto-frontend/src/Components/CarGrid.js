@@ -11,7 +11,7 @@ export default function CarGrid() {
     const navigate = useNavigate();
     const location = useLocation();
     const [cars, setCars] = useState([]);
-    const isAdmin = true//JSON.parse(sessionStorage.getItem('isAdmin'));
+    const isAdmin = JSON.parse(sessionStorage.getItem('isAdmin'));
     //console.log(isAdmin)
     useEffect(() => {
       const getAllCars = async () => {
@@ -37,11 +37,11 @@ export default function CarGrid() {
     
     return (
         <div>
-            <Grid container justifyContent={"center"} alignItems={"center"} spacing={3}>
+            <Grid  container justifyContent={"center"} alignItems={"center"} spacing={3}>
                 {cars.map((car) => {
                     return (
                         <Grid item marginLeft={5} marginRight={5} xs={12} md={4}>
-                            <CarCard car={car} key={car.id}/>                            
+                            <CarCard isAdmin={isAdmin} car={car} key={car.id}/>                            
                         </Grid>
                     )
                 })}
